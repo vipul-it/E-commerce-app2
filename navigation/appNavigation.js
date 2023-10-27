@@ -2,6 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
+import Cart from "../screens/Cart";
 import { Dimensions, LogBox, Platform, Text, View } from "react-native";
 import ProductScreen from "../screens/ProductScreen";
 import { themeColors } from "../theme";
@@ -43,6 +44,11 @@ export default function AppNavigation() {
           options={{ headerShown: false }}
           component={ProductScreen}
         />
+        <Stack.Screen
+          name="Cart"
+          options={{ headerShown: false }}
+          component={Cart}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -71,7 +77,7 @@ function HomeTabs() {
     >
       <Tab.Screen name="home" component={HomeScreen} />
       <Tab.Screen name="favourite" component={HomeScreen} />
-      <Tab.Screen name="cart" component={HomeScreen} />
+      <Tab.Screen name="cart" component={Cart} />
     </Tab.Navigator>
   );
 }
@@ -98,6 +104,7 @@ const menuIcons = (route, focused) => {
       <BagOutline size="30" strokeWidth={2} color="white" />
     );
   }
+  
 
   let buttonClass = focused ? "bg-white" : "";
   return (

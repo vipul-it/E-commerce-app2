@@ -16,12 +16,14 @@ import { categories, coffeeItems } from "../constants";
 import Carousel from "react-native-snap-carousel";
 import CoffeeCard from "../components/coffeeCard";
 import { BellIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
-import { MapPinIcon } from "react-native-heroicons/solid";
+import { MapPinIcon, UserCircleIcon } from "react-native-heroicons/solid";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 const ios = Platform.OS == "ios";
 export default function HomeScreen() {
   const [activeCategory, setActiveCategory] = useState(1);
+  const navigation = useNavigation();
 
   return (
     <View className="flex-1 relative bg-white">
@@ -35,18 +37,15 @@ export default function HomeScreen() {
       <SafeAreaView className={ios ? "-mb-8" : ""}>
         {/* avatar and bell icon */}
         <View className="mx-4 flex-row justify-between items-center">
-          <TouchableOpacity onPress={()=>{
-            
-          }}><Image
-            source={require("../assets/images/avatar.png")}
-            className="h-9 w-9 rounded-full"
-          /></TouchableOpacity>
+          <TouchableOpacity onPress={()=> navigation.navigate('Cart')}>
+            <UserCircleIcon size="40" color={themeColors.bgLight} />
+          </TouchableOpacity>
 
           <View className="flex-row items-center space-x-2">
             <MapPinIcon size="25" color={themeColors.bgLight} />
-            <Text className="font-semibold text-base">New York, NYC</Text>
+            <Text className="font-semibold text-base">Noida, India</Text>
           </View>
-          <BellIcon size="27" color="black" />
+          <BellIcon size="27" color={themeColors.bgLight} />
         </View>
         {/* search bar */}
         <View className="mx-5 shadow" style={{ marginTop: height * 0.06 }}>
@@ -95,7 +94,7 @@ export default function HomeScreen() {
       </SafeAreaView>
 
       {/* coffee cards */}
-      {/* <View className={`overflow-visible flex justify-center flex-1 ${ios? 'mt-10':''}`}>
+      <View className={`overflow-visible flex justify-center flex-1 ${ios? 'mt-10':''}`}>
         <View>
           <Carousel
             containerCustomStyle={{overflow: 'visible'}}
@@ -111,7 +110,7 @@ export default function HomeScreen() {
           />
         </View>
         
-      </View> */}
+      </View>
     </View>
   );
 }
